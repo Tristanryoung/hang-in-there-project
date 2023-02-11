@@ -4,12 +4,13 @@ var title = document.querySelector('.poster-title');
 var quote = document.querySelector('.poster-quote');
 var image = document.querySelector('.poster-img');
 
-var savedPostersButton = document.querySelector('.show-saved');
+var showSavedButton = document.querySelector('.show-saved');
 var randomPosterButton = document.querySelector('.show-random');
 var makePosterButton = document.querySelector('.show-form');
 var nevermindButton = document.querySelector('.show-main');
 var backToMainButton = document.querySelector('.back-to-main');
 var showMyPosterButton = document.querySelector('.make-poster');
+var savePosterButton = document.querySelector('.save-poster');
 
 var mainPosterPage = document.querySelector('.main-poster');
 var posterFormPage = document.querySelector('.poster-form');
@@ -18,6 +19,9 @@ var savedPostersPage = document.querySelector('.saved-posters');
 var motivationalTitleInput = document.querySelector('#poster-title');
 var motivationalQuoteInput = document.querySelector('#poster-quote');
 var motivationalImageInput = document.querySelector('#poster-image-url');
+
+var savedPostersGrid = document.querySelector('saved-posters-grid');
+
 
 
 
@@ -120,9 +124,11 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 
-var currentPoster 
+var currentPoster = new Poster (image, title, quote);
 var savedPosters = [];
-
+var userImageURL = motivationalImageInput.value;
+var userTitle = motivationalTitleInput.value;
+var userQuote = motivationalQuoteInput.value;
 
 title.innerText = (getRandomTitle(titles))
 quote.innerText = (getRandomQuote(quotes))
@@ -131,12 +137,13 @@ image.src = (getRandomImage(images))
 
 // event listeners go here :point_down:
 
-randomPosterButton.addEventListener("click", getRandomPoster);
-makePosterButton.addEventListener("click", switchToForm);
-nevermindButton.addEventListener("click", switchToMain);
-savedPostersButton.addEventListener("click", switchToSaved);
-backToMainButton.addEventListener("click", backToMain);
-showMyPosterButton.addEventListener("click", function(){createPoster(event)});
+randomPosterButton.addEventListener('click', randomPoster);
+makePosterButton.addEventListener('click', switchToForm);
+nevermindButton.addEventListener('click', switchToMain);
+showSavedButton.addEventListener('click', switchToSaved);
+backToMainButton.addEventListener('click', backToMain);
+showMyPosterButton.addEventListener('click', function(){createPoster(event)});
+savePosterButton.addEventListener('click', savePoster);
 
 
 
@@ -176,11 +183,13 @@ function getRandomQuote(quotes) {
 }
 getRandomQuote(quotes);
 
-function getRandomPoster()  {
+function randomPoster()  {
   title.innerText = (getRandomTitle(titles));
   quote.innerText = (getRandomQuote(quotes));
   image.src = (getRandomImage(images));
-  image.alt = "randomized photo of motivational animal";
+  image.alt = 'randomized photo of motivational animal';
+  currentPoster = new Poster (image.src, title.innerText, quote.innerText);
+  console.log(currentPoster);
 }
 
 function switchToForm() {
@@ -196,6 +205,7 @@ function switchToMain() {
 function switchToSaved()  {
   hide(mainPosterPage);
   show(savedPostersPage);
+  //for loop creates a new element for every position in array, stops iterating at last position in array 
 }
 
 function backToMain() {
@@ -217,3 +227,13 @@ function createPoster(event) {
   quotes.push(userQuote);
   switchToMain();
 }
+
+function savePoster() {
+ if (currentPoster.title !== "" && !(savedPosters.includes(currentPoster)))  {
+  savedPosters.push(currentPoster);
+  console.log(savedPosters);
+ }
+}
+
+
+
