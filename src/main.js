@@ -20,9 +20,7 @@ var motivationalTitleInput = document.querySelector('#poster-title');
 var motivationalQuoteInput = document.querySelector('#poster-quote');
 var motivationalImageInput = document.querySelector('#poster-image-url');
 
-var savedPostersGrid = document.querySelector('saved-posters-grid');
-
-
+var savedPostersGrid = document.querySelector('.saved-posters-grid');
 
 
 // we've provided you with some data to work with :point_down:
@@ -124,7 +122,6 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 
-var currentPoster = new Poster (image, title, quote);
 var savedPosters = [];
 var userImageURL = motivationalImageInput.value;
 var userTitle = motivationalTitleInput.value;
@@ -133,6 +130,8 @@ var userQuote = motivationalQuoteInput.value;
 title.innerText = (getRandomTitle(titles))
 quote.innerText = (getRandomQuote(quotes))
 image.src = (getRandomImage(images))
+
+var currentPoster = new Poster (image.src, title.innerText, quote.innerText);
 
 
 // event listeners go here :point_down:
@@ -202,10 +201,20 @@ function switchToMain() {
   show(mainPosterPage);
 }
 
+  //for loop creates a new element for every position in array, stops iterating at last position in array 
 function switchToSaved()  {
   hide(mainPosterPage);
   show(savedPostersPage);
-  //for loop creates a new element for every position in array, stops iterating at last position in array 
+  savedPostersGrid.innerHTML = ``;
+   for (var i = 0; i < savedPosters.length; i++) {
+    savedPostersGrid.innerHTML += 
+    `<article
+    class="mini-poster"><img class="mini-poster img" src="${savedPosters[i].imageURL}">
+    <h2 class="mini-poster-title">${savedPosters[i].title}</h2>
+    <h4 class="mini-poster-quote">"${savedPosters[i].quote}</h4>
+    </article>`
+  }
+  //return savedPostersGrid;
 }
 
 function backToMain() {
