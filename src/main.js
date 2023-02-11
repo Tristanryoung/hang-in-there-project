@@ -228,6 +228,7 @@ function createPoster(event) {
   switchToMain();
 }
 
+
 function savePoster() {
  if (currentPoster.title !== "" && !(savedPosters.includes(currentPoster)))  {
   savedPosters.push(currentPoster);
