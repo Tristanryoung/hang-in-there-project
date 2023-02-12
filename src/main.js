@@ -23,6 +23,7 @@ var motivationalImageInput = document.querySelector('#poster-image-url');
 var savedPostersGrid = document.querySelector('.saved-posters-grid');
 
 
+
 // we've provided you with some data to work with :point_down:
 var images = [
   "./assets/bees.jpg",
@@ -143,7 +144,7 @@ showSavedButton.addEventListener('click', switchToSaved);
 backToMainButton.addEventListener('click', backToMain);
 showMyPosterButton.addEventListener('click', function(){createPoster(event)});
 savePosterButton.addEventListener('click', savePoster);
-
+savedPostersGrid.addEventListener('dblclick', function(){deleteSavedPoster(event)});
 
 
 // functions and event handlers go here :point_down:
@@ -201,20 +202,18 @@ function switchToMain() {
   show(mainPosterPage);
 }
 
-  //for loop creates a new element for every position in array, stops iterating at last position in array 
 function switchToSaved()  {
   hide(mainPosterPage);
   show(savedPostersPage);
   savedPostersGrid.innerHTML = ``;
    for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += 
-    `<article
-    class="mini-poster"><img class="mini-poster img" src="${savedPosters[i].imageURL}">
-    <h2 class="mini-poster-title">${savedPosters[i].title}</h2>
-    <h4 class="mini-poster-quote">"${savedPosters[i].quote}</h4>
-    </article>`
+    `<article class="mini-poster" id="${savedPosters[i].id}">
+      <img class="mini-poster-img" src="${savedPosters[i].imageURL}">
+      <h2 class="mini-poster-title">${savedPosters[i].title}</h2>
+      <h4 class="mini-poster-quote">"${savedPosters[i].quote}</h4>
+    </article>`;
   }
-  //return savedPostersGrid;
 }
 
 function backToMain() {
@@ -245,5 +244,18 @@ function savePoster() {
  }
 }
 
-
+function deleteSavedPoster()  {
+  var posterToBeDeleted = event.target.closest('.mini-poster');
+  if (posterToBeDeleted !== null) {
+    // console.log(posterToBeDeleted.id);
+    for (var i = 0; i < savedPosters.length; i++) {
+      // console.log(i, savedPosters[i].id);
+      if (`${savedPosters[i].id}` === `${posterToBeDeleted.id}`)  {
+        // console.log(savedPosters[i].id);
+        savedPosters.splice(i, 1);
+      }
+    }
+    posterToBeDeleted.remove();
+  }
+}
 
