@@ -241,6 +241,8 @@ function savePoster() {
  if (currentPoster.title !== "" && !(savedPosters.includes(currentPoster)))  {
   savedPosters.push(currentPoster);
   console.log(savedPosters);
+ } else   {
+  alert("NOPE, this poster has already been saved!")
  }
 }
 
@@ -250,7 +252,7 @@ function deleteSavedPoster()  {
     // console.log(posterToBeDeleted.id);
     for (var i = 0; i < savedPosters.length; i++) {
       // console.log(i, savedPosters[i].id);
-      if (`${savedPosters[i].id}` === `${posterToBeDeleted.id}`)  {
+      if (savedPosters[i].id == posterToBeDeleted.id)  {
         // console.log(savedPosters[i].id);
         savedPosters.splice(i, 1);
       }
