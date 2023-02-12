@@ -218,6 +218,9 @@ function createPoster(event) {
   images.push(userImageURL);
   titles.push(userTitle);
   quotes.push(userQuote);
+  if (userImageURL === "" || userTitle === "" || userQuote === "")  {
+    alert("It doesn't look like your poster is quite finished.")
+  }
   switchToMain();
 }
 
