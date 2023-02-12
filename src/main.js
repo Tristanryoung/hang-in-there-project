@@ -150,25 +150,21 @@ const show = (element) => {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-getRandomIndex(images);
 
 function getRandomImage(images) {
   var randomImage = images[getRandomIndex(images)];
   return randomImage;
 }
-getRandomImage(images);
 
 function getRandomTitle(titles) {
   var randomTitle = titles[getRandomIndex(images)];
   return randomTitle;
 }
-getRandomTitle(titles);
 
 function getRandomQuote(quotes) {
   var randomQuote = quotes[getRandomIndex(images)];
   return randomQuote;
 }
-getRandomQuote(quotes);
 
 function randomPoster()  {
   title.innerText = (getRandomTitle(titles));
@@ -221,7 +217,6 @@ function createPoster(event) {
   quotes.push(userQuote);
   switchToMain();
 }
-
 
 function savePoster() {
  if (currentPoster.title !== "" && !(savedPosters.includes(currentPoster)))  {
