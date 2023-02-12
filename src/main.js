@@ -196,6 +196,9 @@ function switchToSaved()  {
       <h4 class="mini-poster-quote">"${savedPosters[i].quote}</h4>
     </article>`;
   }
+  if (savedPosters.length === 0)  {
+    alert("You have no saved posters.")
+  }
 }
 
 function backToMain() {
